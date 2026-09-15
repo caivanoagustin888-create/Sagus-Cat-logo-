@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="Sagus — Decants importados de 5 ml, 10 ml y 60 ml.">
+  <title>SAGUS | Decants Importados</title>
+
+  <style>
+    :root{
+      --bg:#080808;
+      --bg2:#111111;
+      --card:#151515;
+      --line:#292929;
+      --text:#f5f5f5;
+      --muted:#a6a6a6;
+      --accent:#ffffff;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(92%,var(--max));
+      margin:auto;
+    }
+
+    /* NAV */
+    nav{
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:20;
+      background:rgba(8,8,8,.88);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .logo{
+      font-family:Georgia,serif;
+      font-size:1.55rem;
+      letter-spacing:.22em;
+      font-weight:600;
+    }
+    .nav-links{
+      display:flex;
+      gap:24px;
+      color:#ccc;
+      font-size:.88rem;
+    }
+    .nav-links a:hover{color:#fff}
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 75% 35%,rgba(255,255,255,.08),transparent 28%),
+        radial-gradient(circle at 20% 80%,rgba(255,255,255,.035),transparent 25%),
+        var(--bg);
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      width:520px;height:520px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:50%;
+      right:-180px;top:20%;
+    }
+    .hero-content{
+      position:relative;
+      z-index:1;
+      padding:120px 0 70px;
+      max-width:760px;
+    }
+    .eyebrow{
+      color:#aaa;
+      letter-spacing:.28em;
+      font-size:.75rem;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    }
+    h1{
+      font-family:Georgia,serif;
+      font-size:clamp(4rem,12vw,8rem);
+      line-height:.9;
+      letter-spacing:.08em;
+      font-weight:500;
+    }
+    .hero h2{
+      margin-top:26px;
+      font-family:Georgia,serif;
+      font-weight:400;
+      font-size:clamp(1.35rem,3vw,2.1rem);
+    }
+    .hero p{
+      color:var(--muted);
+      max-width:580px;
+      margin-top:16px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:30px;
+      padding:14px 23px;
+      border:1px solid #fff;
+      background:#fff;
+      color:#080808;
+      border-radius:999px;
+      font-weight:700;
+      transition:.2s;
+    }
+    .btn:hover{
+      background:transparent;
+      color:#fff;
+      transform:translateY(-2px);
+    }
+    .btn.dark{
+      background:transparent;
+      color:#fff;
+      border-color:#444;
+    }
+    .btn.dark:hover{border-color:#fff}
+
+    /* SECTIONS */
+    section{padding:100px 0}
+    .section-kicker{
+      color:#888;
+      font-size:.72rem;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .section-title{
+      font-family:Georgia,serif;
+      font-weight:400;
+      font-size:clamp(2.2rem,5vw,3.6rem);
+      margin-bottom:18px;
+    }
+    .section-intro{
+      color:var(--muted);
+      max-width:650px;
+      margin-bottom:45px;
+    }
+
+    /* FORMATS */
+    .formats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .format-card{
+      background:linear-gradient(145deg,#181818,#101010);
+      border:1px solid var(--line);
+      padding:30px;
+      min-height:230px;
+      transition:.25s;
+    }
+    .format-card:hover{
+      transform:translateY(-5px);
+      border-color:#555;
+    }
+    .format-size{
+      font-family:Georgia,serif;
+      font-size:2.5rem;
+      margin-bottom:18px;
+    }
+    .format-card h3{margin-bottom:8px}
+    .format-card p{color:var(--muted);font-size:.95rem}
+
+    /* PRODUCTS */
+    .products{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+    .product{
+      background:var(--card);
+      border:1px solid var(--line);
+      overflow:hidden;
+      transition:.25s;
+    }
+    .product:hover{
+      transform:translateY(-5px);
+      border-color:#555;
+    }
+    .product-photo{
+      aspect-ratio:4/3;
+      background:
+        linear-gradient(135deg,#202020,#0d0d0d);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#666;
+      text-align:center;
+      padding:20px;
+    }
+    .product-photo span{
+      font-size:.75rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .product-body{padding:24px}
+    .product h3{
+      font-family:Georgia,serif;
+      font-size:1.45rem;
+      font-weight:400;
+    }
+    .notes{
+      color:#999;
+      font-size:.82rem;
+      margin:7px 0 18px;
+    }
+    .sizes{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .size{
+      border:1px solid #393939;
+      padding:7px 10px;
+      font-size:.78rem;
+      border-radius:20px;
+      color:#ddd;
+    }
+    .price{
+      font-size:.95rem;
+      color:#fff;
+      margin-bottom:15px;
+    }
+    .consult{
+      display:block;
+      text-align:center;
+      border:1px solid #444;
+      padding:11px;
+      border-radius:7px;
+      font-weight:700;
+      font-size:.88rem;
+    }
+    .consult:hover{border-color:#fff}
+
+    /* HOW */
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+    }
+    .step{
+      border-top:1px solid #444;
+      padding-top:22px;
+    }
+    .step-number{
+      color:#777;
+      font-size:.75rem;
+      letter-spacing:.2em;
+      margin-bottom:12px;
+    }
+    .step h3{margin-bottom:7px}
+    .step p{color:var(--muted);font-size:.9rem}
+
+    /* BRAND */
+    .brand-box{
+      border:1px solid var(--line);
+      padding:60px 35px;
+      text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,255,255,.055),transparent 55%),
+        #0e0e0e;
+    }
+    .brand-box .big-s{
+      font-family:Georgia,serif;
+      font-size:6rem;
+      line-height:1;
+      opacity:.9;
+    }
+    .brand-box p{
+      max-width:600px;
+      margin:15px auto 0;
+      color:#aaa;
+    }
+
+    /* CONTACT */
+    .contact{
+      text-align:center;
+      padding-bottom:70px;
+    }
+    .contact p{color:var(--muted);margin-bottom:8px}
+    .contact-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:28px 0;
+      color:#777;
+      text-align:center;
+      font-size:.8rem;
+    }
+    footer strong{
+      color:#ddd;
+      font-family:Georgia,serif;
+      letter-spacing:.18em;
+    }
+
+    /* MOBILE */
+    @media(max-width:800px){
+      .nav-links{display:none}
+      .formats,.products{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      section{padding:75px 0}
+    }
+    @media(max-width:500px){
+      .steps{grid-template-columns:1fr}
+      .hero-content{padding-top:110px}
+      .logo{font-size:1.25rem}
+      .format-card{min-height:auto}
+    }
+  
+    .featured-products .product{border-color:#444}
+    .featured-products .product-photo{background:radial-gradient(circle at center, #292929, #0d0d0d)}
+    .brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .brand-group{border:1px solid var(--line);background:var(--card);padding:22px}
+    .brand-group h3{
+      font-family:Georgia,serif;font-weight:400;font-size:1.2rem;
+      padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #333;
+      letter-spacing:.03em;
+    }
+    .perfume-list{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+    .perfume-item{
+      display:flex;flex-direction:column;gap:2px;
+      padding:10px 11px;border:1px solid #252525;border-radius:6px;
+      background:#111;transition:.18s;
+    }
+    .perfume-item:hover{border-color:#777;background:#181818;transform:translateY(-1px)}
+    .perfume-item span{font-size:.9rem;color:#eee}
+    .perfume-item small{font-size:.68rem;color:#777}
+    .catalog-nav{
+      display:flex;flex-wrap:wrap;gap:10px;margin:-20px 0 45px;
+    }
+    .catalog-nav a{border:1px solid #393939;border-radius:999px;padding:9px 13px;font-size:.78rem;color:#ccc}
+    .catalog-nav a:hover{border-color:#fff;color:#fff}
+    @media(max-width:800px){.brand-grid{grid-template-columns:1fr}}
+    @media(max-width:500px){.perfume-list{grid-template-columns:1fr}}
+
+  
+    .hero-logo-mark{font-family:Georgia,serif;font-size:2.8rem;width:68px;height:68px;border:1px solid #555;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#ddd}
+
+    /* SAGUS LOGO */
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-mark{
+      width:35px;height:35px;border:1px solid #aaa;border-radius:50%;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-family:Georgia,serif;font-size:1.35rem;line-height:1;
+      box-shadow:inset 0 0 0 2px #0b0b0b;
+    }
+
+    /* SEARCH */
+    .search-panel{
+      border:1px solid var(--line);background:linear-gradient(145deg,#151515,#0d0d0d);
+      padding:28px;
+    }
+    .search-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .search-title h2{font-family:Georgia,serif;font-size:1.8rem;font-weight:400}
+    .search-icon{font-size:2.6rem;color:#888;line-height:1}
+    .search-box{
+      display:flex;align-items:center;gap:10px;
+      border:1px solid #3a3a3a;background:#090909;border-radius:8px;
+      padding:0 13px;
+    }
+    .search-box > span{font-size:1.5rem;color:#aaa}
+    .search-box input{
+      width:100%;border:0;outline:0;background:transparent;color:#fff;
+      padding:15px 0;font-size:1rem;
+    }
+    .search-box input::placeholder{color:#777}
+    .search-box button{border:0;background:none;color:#888;font-size:1.6rem;cursor:pointer}
+    .filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .filter{
+      border:1px solid #393939;background:#111;color:#bbb;
+      border-radius:999px;padding:8px 13px;cursor:pointer;font-size:.78rem;
+    }
+    .filter:hover,.filter.active{border-color:#fff;color:#fff;background:#1d1d1d}
+    .search-result{color:#777;font-size:.78rem;margin-top:13px;min-height:17px}
+
+    /* CATALOG ITEMS */
+    .perfume-list{gap:8px}
+    .perfume-item-wrap{display:flex;gap:5px;min-width:0}
+    .perfume-item-wrap .perfume-item{flex:1;min-width:0}
+    .add-mini{
+      width:36px;min-width:36px;border:1px solid #303030;background:#0b0b0b;
+      color:#fff;border-radius:6px;cursor:pointer;font-size:1.15rem;
+    }
+    .add-mini:hover,.add-product:hover{border-color:#fff;background:#222}
+    .product-actions{display:grid;grid-template-columns:1fr auto;gap:7px}
+    .add-product{
+      border:1px solid #444;background:#fff;color:#090909;border-radius:7px;
+      padding:0 13px;font-size:.78rem;font-weight:700;cursor:pointer;
+    }
+
+    /* CART */
+    .cart-button{
+      position:fixed;right:18px;bottom:18px;z-index:30;
+      display:flex;align-items:center;gap:8px;border:1px solid #fff;
+      background:#fff;color:#080808;border-radius:999px;padding:12px 15px;
+      font-weight:700;box-shadow:0 10px 35px rgba(0,0,0,.45);cursor:pointer;
+    }
+    .cart-button b{
+      min-width:22px;height:22px;border-radius:50%;display:inline-flex;
+      align-items:center;justify-content:center;background:#111;color:#fff;font-size:.72rem;
+    }
+    .cart-symbol{font-size:1rem}
+    .cart-overlay{
+      position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.65);
+      opacity:0;visibility:hidden;transition:.25s;
+    }
+    .cart-overlay.open{opacity:1;visibility:visible}
+    .cart-drawer{
+      position:absolute;right:0;top:0;height:100%;width:min(430px,100%);
+      background:#0d0d0d;border-left:1px solid #333;padding:28px;
+      display:flex;flex-direction:column;transform:translateX(100%);transition:.25s;
+    }
+    .cart-overlay.open .cart-drawer{transform:translateX(0)}
+    .cart-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #292929;padding-bottom:18px}
+    .cart-head h2{font-family:Georgia,serif;font-size:2rem;font-weight:400}
+    .close-cart{background:none;border:0;color:#fff;font-size:2rem;cursor:pointer}
+    .cart-items{overflow:auto;flex:1;padding:18px 0}
+    .empty-cart{text-align:center;color:#777;padding:55px 10px}
+    .empty-cart div{font-size:2.5rem;margin-bottom:10px}
+    .empty-cart h3{color:#ddd;margin-bottom:6px}
+    .cart-item{
+      display:grid;grid-template-columns:1fr auto;gap:12px;
+      padding:15px 0;border-bottom:1px solid #262626;
+    }
+    .cart-item h3{font-family:Georgia,serif;font-weight:400;font-size:1.05rem}
+    .cart-item small{display:block;color:#777;margin-top:4px}
+    .cart-size{margin-top:8px;background:#111;color:#eee;border:1px solid #444;border-radius:5px;padding:6px 8px;font-size:.75rem}
+    .cart-controls{display:flex;align-items:center;gap:6px}
+    .cart-controls button{
+      width:28px;height:28px;border:1px solid #444;background:#111;color:#fff;
+      border-radius:5px;cursor:pointer;
+    }
+    .cart-remove{font-size:.72rem!important;width:auto!important;padding:0 7px}
+    .cart-footer{border-top:1px solid #292929;padding-top:18px}
+    .cart-note{color:#777;font-size:.75rem;line-height:1.4;margin-bottom:10px}
+    .cart-send,.cart-clear{width:100%;margin-top:8px}
+    .cart-clear{margin-top:8px}
+    body.cart-open{overflow:hidden}
+
+    @media(max-width:500px){
+      .search-panel{padding:20px}
+      .cart-button{right:12px;bottom:12px}
+      .cart-drawer{padding:22px}
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#inicio" class="logo" aria-label="Sagus inicio"><span class="logo-mark">S</span><span>SAGUS</span></a>
+      <div class="nav-links">
+        <a href="#formatos">Formatos</a>
+        <a href="#mas-pedidos">Más pedidos</a>
+        <a href="#arabes">Catálogo</a>
+        <a href="#comprar">Cómo comprar</a>
+        <a href="#contacto">Contacto</a><a href="https://instagram.com/Sagus_prime02" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+      <div class="container hero-content">
+        <div class="hero-logo-mark" aria-hidden="true">S</div>
+        <div class="eyebrow">Decants importados</div>
+        <h1>SAGUS</h1>
+        <h2>No vendemos perfumes. Vendemos presencia. ✨</h2>
+        <p>
+          Descubrí fragancias para cada estilo y ocasión,
+          disponibles en 5 ml, 10 ml y 60 ml.
+        </p>
+        <a class="btn" href="#catalogo">VER CATÁLOGO</a>
+      </div>
+    </section>
+
+    <!-- FORMATOS -->
+    <section id="formatos">
+      <div class="container">
+        <div class="section-kicker">Elegí tu tamaño</div>
+        <h2 class="section-title">Nuestros formatos</h2>
+        <p class="section-intro">
+          Tres tamaños para que elijas entre probar una fragancia,
+          llevarla con vos o disfrutarla todos los días.
+        </p>
+
+        <div class="formats">
+          <article class="format-card">
+            <div class="format-size">5 ml</div>
+            <h3>Para descubrir</h3>
+            <p>Ideal para probar una fragancia nueva o llevarla cómodamente a cualquier lugar.</p>
+          </article>
+
+          <article class="format-card">
+            <div class="format-size">10 ml</div>
+            <h3>Para disfrutar</h3>
+            <p>Un formato práctico con más cantidad para usar tu fragancia durante más tiempo.</p>
+          </article>
+
+          <article class="format-card">
+            <div class="format-size">60 ml</div>
+            <h3>Para todos los días</h3>
+            <p>Mayor cantidad para quienes ya encontraron una fragancia que quieren usar habitualmente.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- MÁS PEDIDOS -->
+    <section id="mas-pedidos">
+      <div class="container">
+        <div class="section-kicker">Sagus favorites</div>
+        <h2 class="section-title">Más pedidos</h2>
+        <p class="section-intro">
+          Una selección de las fragancias principales de Sagus. Consultá disponibilidad
+          en 5 ml, 10 ml y 60 ml.
+        </p>
+
+        <div class="products featured-products">
+          <article class="product featured">
+            <div class="product-photo"><span>⭐ Eclaire</span></div>
+            <div class="product-body"><h3>Eclaire</h3><div class="notes">Dulce · Cremoso · Gourmand</div><div class="sizes"><span class="size">5 ml</span><span class="size">10 ml</span><span class="size">60 ml</span></div><div class="price">Más pedido · Consultar precio</div><div class="product-actions"><a class="consult" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Eclaire." target="_blank">CONSULTAR</a><button class="add-product" type="button" data-name="Eclaire">AGREGAR</button></div></div>
+          </article>
+          <article class="product featured">
+            <div class="product-photo"><span>⭐ Amber Oud Gold</span></div>
+            <div class="product-body"><h3>Amber Oud Gold</h3><div class="notes">Dulce · Frutal · Intenso</div><div class="sizes"><span class="size">5 ml</span><span class="size">10 ml</span><span class="size">60 ml</span></div><div class="price">Más pedido · Consultar precio</div><div class="product-actions"><a class="consult" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Amber%20Oud%20Gold." target="_blank">CONSULTAR</a><button class="add-product" type="button" data-name="Amber Oud Gold">AGREGAR</button></div></div>
+          </article>
+          <article class="product featured">
+            <div class="product-photo"><span>⭐ Scandal</span></div>
+            <div class="product-body"><h3>Scandal</h3><div class="notes">Dulce · Sensual · Intenso</div><div class="sizes"><span class="size">5 ml</span><span class="size">10 ml</span><span class="size">60 ml</span></div><div class="price">Más pedido · Consultar precio</div><div class="product-actions"><a class="consult" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Scandal." target="_blank">CONSULTAR</a><button class="add-product" type="button" data-name="Scandal">AGREGAR</button></div></div>
+          </article>
+          <article class="product featured">
+            <div class="product-photo"><span>⭐ Dylan Blue</span></div>
+            <div class="product-body"><h3>Dylan Blue</h3><div class="notes">Fresco · Aromático · Versátil</div><div class="sizes"><span class="size">5 ml</span><span class="size">10 ml</span><span class="size">60 ml</span></div><div class="price">Más pedido · Consultar precio</div><div class="product-actions"><a class="consult" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Dylan%20Blue." target="_blank">CONSULTAR</a><button class="add-product" type="button" data-name="Dylan Blue">AGREGAR</button></div></div>
+          </article>
+          <article class="product featured">
+            <div class="product-photo"><span>⭐ Acqua di Gio</span></div>
+            <div class="product-body"><h3>Acqua di Gio</h3><div class="notes">Fresco · Acuático · Elegante</div><div class="sizes"><span class="size">5 ml</span><span class="size">10 ml</span><span class="size">60 ml</span></div><div class="price">Más pedido · Consultar precio</div><div class="product-actions"><a class="consult" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Acqua%20di%20Gio." target="_blank">CONSULTAR</a><button class="add-product" type="button" data-name="Acqua di Gio">AGREGAR</button></div></div>
+          </article>
+          <article class="product featured">
+            <div class="product-photo"><span>⭐ Le Beau</span></div>
+            <div class="product-body"><h3>Jean Paul Gaultier Le Beau</h3><div class="notes">Fresco · Dulce · Seductor</div><div class="sizes"><span class="size">5 ml</span><span class="size">10 ml</span><span class="size">60 ml</span></div><div class="price">Más pedido · Consultar precio</div><div class="product-actions"><a class="consult" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Jean%20Paul%20Gaultier%20Le%20Beau." target="_blank">CONSULTAR</a><button class="add-product" type="button" data-name="Jean Paul Gaultier Le Beau">AGREGAR</button></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUSCADOR Y FILTROS -->
+    <section id="buscador" style="padding-top:30px;padding-bottom:35px">
+      <div class="container">
+        <div class="search-panel">
+          <div class="search-title">
+            <div>
+              <div class="section-kicker">Encontrá tu fragancia</div>
+              <h2>Buscá rápido</h2>
+            </div>
+            <span class="search-icon">⌕</span>
+          </div>
+
+          <div class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Buscar perfume o marca..." autocomplete="off">
+            <button id="clearSearch" type="button" aria-label="Limpiar búsqueda">×</button>
+          </div>
+
+          <div class="filter-row">
+            <button class="filter active" data-filter="all">Todos</button>
+            <button class="filter" data-filter="arabes">Árabes</button>
+            <button class="filter" data-filter="masculinos">Masculinos</button>
+            <button class="filter" data-filter="femeninos">Femeninos</button>
+            <button class="filter" data-filter="5 ml">5 ml</button>
+            <button class="filter" data-filter="10 ml">10 ml</button>
+            <button class="filter" data-filter="60 ml">60 ml</button>
+          </div>
+          <div id="searchResult" class="search-result"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESOS AL CATÁLOGO COMPLETO -->
+    <section style="padding-top:20px;padding-bottom:20px">
+      <div class="container">
+        <div class="catalog-nav">
+          <a href="#arabes">Árabes</a>
+          <a href="#masculinos">Masculinos</a>
+          <a href="#femeninos">Femeninos</a>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="arabes">
+      <div class="container">
+        <div class="section-kicker">Catálogo completo</div>
+        <h2 class="section-title">Fragancias árabes</h2>
+        <p class="section-intro">Todas las fragancias de esta categoría disponibles para consultar en 5 ml, 10 ml y 60 ml.</p>
+        <div class="brand-grid">
+<div class="brand-group"><h3>LATTAFA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Asad." target="_blank"><span>Asad</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Asad" aria-label="Agregar Asad al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Asad%20Bourbon." target="_blank"><span>Asad Bourbon</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Asad Bourbon" aria-label="Agregar Asad Bourbon al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Eclaire." target="_blank"><span>Eclaire</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Eclaire" aria-label="Agregar Eclaire al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Khamrah." target="_blank"><span>Khamrah</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Khamrah" aria-label="Agregar Khamrah al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Khamrah%20Qahwa." target="_blank"><span>Khamrah Qahwa</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Khamrah Qahwa" aria-label="Agregar Khamrah Qahwa al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Nebras." target="_blank"><span>Nebras</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Nebras" aria-label="Agregar Nebras al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Opulent%20Musk." target="_blank"><span>Opulent Musk</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Opulent Musk" aria-label="Agregar Opulent Musk al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Oud%20Mood." target="_blank"><span>Oud Mood</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Oud Mood" aria-label="Agregar Oud Mood al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Sakeena." target="_blank"><span>Sakeena</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Sakeena" aria-label="Agregar Sakeena al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Teriaq." target="_blank"><span>Teriaq</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Teriaq" aria-label="Agregar Teriaq al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Yara." target="_blank"><span>Yara</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Yara" aria-label="Agregar Yara al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Yara%20Candy." target="_blank"><span>Yara Candy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Yara Candy" aria-label="Agregar Yara Candy al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Yara%20Tous." target="_blank"><span>Yara Tous</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Yara Tous" aria-label="Agregar Yara Tous al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>KAYALI</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Yum." target="_blank"><span>Yum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Yum" aria-label="Agregar Yum al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Marshmallow." target="_blank"><span>Marshmallow</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Marshmallow" aria-label="Agregar Marshmallow al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Yum%20Pistachio." target="_blank"><span>Yum Pistachio</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Yum Pistachio" aria-label="Agregar Yum Pistachio al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>BHARARA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bharara%20King." target="_blank"><span>Bharara King</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bharara King" aria-label="Agregar Bharara King al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>ARMAF</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Club%20de%20Nuit." target="_blank"><span>Club de Nuit</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Club de Nuit" aria-label="Agregar Club de Nuit al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Mandarín%20Sky." target="_blank"><span>Mandarín Sky</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Mandarín Sky" aria-label="Agregar Mandarín Sky al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>C. CARBONNEL</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Dahad%20Kajal." target="_blank"><span>Dahad Kajal</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Dahad Kajal" aria-label="Agregar Dahad Kajal al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>XERJOFF</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Eran%20Pura." target="_blank"><span>Eran Pura</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Eran Pura" aria-label="Agregar Eran Pura al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>MONTALE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Arabians%20Tonka." target="_blank"><span>Arabians Tonka</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Arabians Tonka" aria-label="Agregar Arabians Tonka al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>AL HARAMAIN</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Amber%20Oud%20Gold." target="_blank"><span>Amber Oud Gold</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Amber Oud Gold" aria-label="Agregar Amber Oud Gold al carrito">+</button></div>
+</div></div>
+</div></div></section>
+    <section id="masculinos">
+      <div class="container">
+        <div class="section-kicker">Catálogo completo</div>
+        <h2 class="section-title">Fragancias masculinas</h2>
+        <p class="section-intro">Todas las fragancias de esta categoría disponibles para consultar en 5 ml, 10 ml y 60 ml.</p>
+        <div class="brand-grid">
+<div class="brand-group"><h3>CAROLINA HERRERA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Heroes." target="_blank"><span>212 Heroes</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Heroes" aria-label="Agregar 212 Heroes al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20New%20York." target="_blank"><span>212 New York</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 New York" aria-label="Agregar 212 New York al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Sexy." target="_blank"><span>212 Sexy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Sexy" aria-label="Agregar 212 Sexy al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Vip." target="_blank"><span>212 Vip</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Vip" aria-label="Agregar 212 Vip al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Vip%20Black." target="_blank"><span>212 Vip Black</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Vip Black" aria-label="Agregar 212 Vip Black al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bad%20Boy." target="_blank"><span>Bad Boy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bad Boy" aria-label="Agregar Bad Boy al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bad%20Boy%20Le%20Parfum." target="_blank"><span>Bad Boy Le Parfum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bad Boy Le Parfum" aria-label="Agregar Bad Boy Le Parfum al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bad%20Boy%20Cobalt." target="_blank"><span>Bad Boy Cobalt</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bad Boy Cobalt" aria-label="Agregar Bad Boy Cobalt al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bad%20Boy%20Extreme." target="_blank"><span>Bad Boy Extreme</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bad Boy Extreme" aria-label="Agregar Bad Boy Extreme al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20CH." target="_blank"><span>CH</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="CH" aria-label="Agregar CH al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>GIORGIO ARMANI</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Acqua%20Di%20Gio." target="_blank"><span>Acqua Di Gio</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Acqua Di Gio" aria-label="Agregar Acqua Di Gio al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Acqua%20Di%20Gio%20Profondo." target="_blank"><span>Acqua Di Gio Profondo</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Acqua Di Gio Profondo" aria-label="Agregar Acqua Di Gio Profondo al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Acqua%20Di%20Gio%20Profumo." target="_blank"><span>Acqua Di Gio Profumo</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Acqua Di Gio Profumo" aria-label="Agregar Acqua Di Gio Profumo al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Armani%20Code." target="_blank"><span>Armani Code</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Armani Code" aria-label="Agregar Armani Code al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Armani%20Code%20Profumo." target="_blank"><span>Armani Code Profumo</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Armani Code Profumo" aria-label="Agregar Armani Code Profumo al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Stronger%20With%20You." target="_blank"><span>Stronger With You</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Stronger With You" aria-label="Agregar Stronger With You al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Stronger%20With%20You%20Intensely." target="_blank"><span>Stronger With You Intensely</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Stronger With You Intensely" aria-label="Agregar Stronger With You Intensely al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CHRISTIAN DIOR</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Dior%20Homme." target="_blank"><span>Dior Homme</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Dior Homme" aria-label="Agregar Dior Homme al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Dior%20Homme%20Intense." target="_blank"><span>Dior Homme Intense</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Dior Homme Intense" aria-label="Agregar Dior Homme Intense al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Fahrenheit." target="_blank"><span>Fahrenheit</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Fahrenheit" aria-label="Agregar Fahrenheit al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Sauvage." target="_blank"><span>Sauvage</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Sauvage" aria-label="Agregar Sauvage al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Sauvage%20Elixir." target="_blank"><span>Sauvage Elixir</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Sauvage Elixir" aria-label="Agregar Sauvage Elixir al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>PACO RABANNE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Invictus." target="_blank"><span>Invictus</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Invictus" aria-label="Agregar Invictus al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Invictus%20Aqua." target="_blank"><span>Invictus Aqua</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Invictus Aqua" aria-label="Agregar Invictus Aqua al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Invictus%20Legend." target="_blank"><span>Invictus Legend</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Invictus Legend" aria-label="Agregar Invictus Legend al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Invictus%20Platinum." target="_blank"><span>Invictus Platinum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Invictus Platinum" aria-label="Agregar Invictus Platinum al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Invictus%20Victory." target="_blank"><span>Invictus Victory</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Invictus Victory" aria-label="Agregar Invictus Victory al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Invictus%20Victory%20Elixir." target="_blank"><span>Invictus Victory Elixir</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Invictus Victory Elixir" aria-label="Agregar Invictus Victory Elixir al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20One%20Million." target="_blank"><span>One Million</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="One Million" aria-label="Agregar One Million al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20One%20Million%20Lucky." target="_blank"><span>One Million Lucky</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="One Million Lucky" aria-label="Agregar One Million Lucky al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Phantom." target="_blank"><span>Phantom</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Phantom" aria-label="Agregar Phantom al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Phantom%20Parfum." target="_blank"><span>Phantom Parfum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Phantom Parfum" aria-label="Agregar Phantom Parfum al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Xs%20Aphrodisiaque." target="_blank"><span>Xs Aphrodisiaque</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Xs Aphrodisiaque" aria-label="Agregar Xs Aphrodisiaque al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Xs%20Black." target="_blank"><span>Xs Black</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Xs Black" aria-label="Agregar Xs Black al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Xs%20Pure." target="_blank"><span>Xs Pure</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Xs Pure" aria-label="Agregar Xs Pure al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>VERSACE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Eros." target="_blank"><span>Eros</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Eros" aria-label="Agregar Eros al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Eros%20Flame." target="_blank"><span>Eros Flame</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Eros Flame" aria-label="Agregar Eros Flame al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Dylan%20Blue." target="_blank"><span>Dylan Blue</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Dylan Blue" aria-label="Agregar Dylan Blue al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>RALPH LAUREN</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Polo." target="_blank"><span>Polo</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Polo" aria-label="Agregar Polo al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Polo%20Blue." target="_blank"><span>Polo Blue</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Polo Blue" aria-label="Agregar Polo Blue al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Polo%20Red." target="_blank"><span>Polo Red</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Polo Red" aria-label="Agregar Polo Red al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Polo%20Sport." target="_blank"><span>Polo Sport</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Polo Sport" aria-label="Agregar Polo Sport al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Polo%20Ultra%20Blue." target="_blank"><span>Polo Ultra Blue</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Polo Ultra Blue" aria-label="Agregar Polo Ultra Blue al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>KENZO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Kenzo%20Homme." target="_blank"><span>Kenzo Homme</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Kenzo Homme" aria-label="Agregar Kenzo Homme al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Kenzo%20Homme%20Night." target="_blank"><span>Kenzo Homme Night</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Kenzo Homme Night" aria-label="Agregar Kenzo Homme Night al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>ISSEY MIYAKE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20L%27Eau%20D%27Issey." target="_blank"><span>L’Eau D’Issey</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="L’Eau D’Issey" aria-label="Agregar L’Eau D’Issey al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>GIVENCHY</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Gentleman%20Only." target="_blank"><span>Gentleman Only</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Gentleman Only" aria-label="Agregar Gentleman Only al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>J.P GAULTIER</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Le%20Beau." target="_blank"><span>Le Beau</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Le Beau" aria-label="Agregar Le Beau al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Le%20Male." target="_blank"><span>Le Male</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Le Male" aria-label="Agregar Le Male al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Scandal." target="_blank"><span>Scandal</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Scandal" aria-label="Agregar Scandal al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Ultra%20Male." target="_blank"><span>Ultra Male</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Ultra Male" aria-label="Agregar Ultra Male al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Le%20Male%20Elixir." target="_blank"><span>Le Male Elixir</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Le Male Elixir" aria-label="Agregar Le Male Elixir al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Le%20Male%20Parfum." target="_blank"><span>Le Male Parfum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Le Male Parfum" aria-label="Agregar Le Male Parfum al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Scandal%20Le%20Parfum." target="_blank"><span>Scandal Le Parfum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Scandal Le Parfum" aria-label="Agregar Scandal Le Parfum al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>ANTONIO BANDERAS</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20King%20Of%20Seduction." target="_blank"><span>King Of Seduction</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="King Of Seduction" aria-label="Agregar King Of Seduction al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Power%20Of%20Seduction." target="_blank"><span>Power Of Seduction</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Power Of Seduction" aria-label="Agregar Power Of Seduction al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Blue%20Seduction." target="_blank"><span>Blue Seduction</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Blue Seduction" aria-label="Agregar Blue Seduction al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Icon." target="_blank"><span>Icon</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Icon" aria-label="Agregar Icon al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>AZZARO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Azzaro." target="_blank"><span>Azzaro</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Azzaro" aria-label="Agregar Azzaro al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20The%20Most%20Wanted." target="_blank"><span>The Most Wanted</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="The Most Wanted" aria-label="Agregar The Most Wanted al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Wanted." target="_blank"><span>Wanted</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Wanted" aria-label="Agregar Wanted al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Wanted%20By%20Night." target="_blank"><span>Wanted By Night</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Wanted By Night" aria-label="Agregar Wanted By Night al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>TOM FORD</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Ombre%20Leather." target="_blank"><span>Ombre Leather</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Ombre Leather" aria-label="Agregar Ombre Leather al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Oud%20Wood." target="_blank"><span>Oud Wood</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Oud Wood" aria-label="Agregar Oud Wood al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Tobacco%20Vanilla." target="_blank"><span>Tobacco Vanilla</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Tobacco Vanilla" aria-label="Agregar Tobacco Vanilla al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>GUCCI</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Gucci%20Guilty%20Black." target="_blank"><span>Gucci Guilty Black</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Gucci Guilty Black" aria-label="Agregar Gucci Guilty Black al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>BULGARY</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bulgary%20Man%20in%20Black." target="_blank"><span>Bulgary Man in Black</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bulgary Man in Black" aria-label="Agregar Bulgary Man in Black al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>MOSCHINO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Toy%20Boy." target="_blank"><span>Toy Boy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Toy Boy" aria-label="Agregar Toy Boy al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>DOLCE & GABBANA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Lightning%20Blue." target="_blank"><span>Lightning Blue</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Lightning Blue" aria-label="Agregar Lightning Blue al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20The%20One%20D%26G." target="_blank"><span>The One D&G</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="The One D&G" aria-label="Agregar The One D&G al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>VALENTINO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Valentino%20Born%20in%20Roma." target="_blank"><span>Valentino Born in Roma</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Valentino Born in Roma" aria-label="Agregar Valentino Born in Roma al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CALVIN KLEIN</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Shock." target="_blank"><span>Shock</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Shock" aria-label="Agregar Shock al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>DAVIDOFF</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Cool%20Water." target="_blank"><span>Cool Water</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Cool Water" aria-label="Agregar Cool Water al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CREED</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Creed%20Aventus." target="_blank"><span>Creed Aventus</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Creed Aventus" aria-label="Agregar Creed Aventus al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>LOUIS VUITTON</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Ombre%20Nomade." target="_blank"><span>Ombre Nomade</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Ombre Nomade" aria-label="Agregar Ombre Nomade al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>VIKTOR & ROLF</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Spice%20Bomb." target="_blank"><span>Spice Bomb</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Spice Bomb" aria-label="Agregar Spice Bomb al carrito">+</button></div>
+</div></div>
+</div></div></section>
+    <section id="femeninos">
+      <div class="container">
+        <div class="section-kicker">Catálogo completo</div>
+        <h2 class="section-title">Fragancias femeninas</h2>
+        <p class="section-intro">Todas las fragancias de esta categoría disponibles para consultar en 5 ml, 10 ml y 60 ml.</p>
+        <div class="brand-grid">
+<div class="brand-group"><h3>CAROLINA HERRERA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Heroes." target="_blank"><span>212 Heroes</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Heroes" aria-label="Agregar 212 Heroes al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20New%20York." target="_blank"><span>212 New York</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 New York" aria-label="Agregar 212 New York al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Sexy." target="_blank"><span>212 Sexy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Sexy" aria-label="Agregar 212 Sexy al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Vip." target="_blank"><span>212 Vip</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Vip" aria-label="Agregar 212 Vip al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20212%20Vip%20Rosé." target="_blank"><span>212 Vip Rosé</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="212 Vip Rosé" aria-label="Agregar 212 Vip Rosé al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20CH." target="_blank"><span>CH</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="CH" aria-label="Agregar CH al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Good%20Girl." target="_blank"><span>Good Girl</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Good Girl" aria-label="Agregar Good Girl al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Good%20Girl%20Blush." target="_blank"><span>Good Girl Blush</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Good Girl Blush" aria-label="Agregar Good Girl Blush al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Good%20Girl%20Supreme." target="_blank"><span>Good Girl Supreme</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Good Girl Supreme" aria-label="Agregar Good Girl Supreme al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Good%20Girl%20Very." target="_blank"><span>Good Girl Very</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Good Girl Very" aria-label="Agregar Good Girl Very al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>THIERRY MUGLER</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Alien." target="_blank"><span>Alien</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Alien" aria-label="Agregar Alien al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Alien%20Goddess." target="_blank"><span>Alien Goddess</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Alien Goddess" aria-label="Agregar Alien Goddess al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Angel." target="_blank"><span>Angel</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Angel" aria-label="Agregar Angel al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Angel%20Nova." target="_blank"><span>Angel Nova</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Angel Nova" aria-label="Agregar Angel Nova al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CHRISTIAN DIOR</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Hypnotic%20Poison." target="_blank"><span>Hypnotic Poison</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Hypnotic Poison" aria-label="Agregar Hypnotic Poison al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Miss%20Dior." target="_blank"><span>Miss Dior</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Miss Dior" aria-label="Agregar Miss Dior al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Poison." target="_blank"><span>Poison</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Poison" aria-label="Agregar Poison al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Poison%20Girl." target="_blank"><span>Poison Girl</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Poison Girl" aria-label="Agregar Poison Girl al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Jadore." target="_blank"><span>Jadore</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Jadore" aria-label="Agregar Jadore al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>PACO RABANNE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Fame." target="_blank"><span>Fame</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Fame" aria-label="Agregar Fame al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Lady%20Millon." target="_blank"><span>Lady Millon</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Lady Millon" aria-label="Agregar Lady Millon al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Olympea." target="_blank"><span>Olympea</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Olympea" aria-label="Agregar Olympea al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Pure%20Xs." target="_blank"><span>Pure Xs</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Pure Xs" aria-label="Agregar Pure Xs al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Xs%20Black." target="_blank"><span>Xs Black</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Xs Black" aria-label="Agregar Xs Black al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>GIVENCHY</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Amarige." target="_blank"><span>Amarige</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Amarige" aria-label="Agregar Amarige al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Ange%20Ou%20Demon." target="_blank"><span>Ange Ou Demon</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Ange Ou Demon" aria-label="Agregar Ange Ou Demon al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20L%27Interdit." target="_blank"><span>L’Interdit</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="L’Interdit" aria-label="Agregar L’Interdit al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20L%27Interdit%20Rouge." target="_blank"><span>L’Interdit Rouge</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="L’Interdit Rouge" aria-label="Agregar L’Interdit Rouge al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Irresistible." target="_blank"><span>Irresistible</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Irresistible" aria-label="Agregar Irresistible al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Very%20Irresistible." target="_blank"><span>Very Irresistible</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Very Irresistible" aria-label="Agregar Very Irresistible al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CACHAREL</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Amor%20Amor." target="_blank"><span>Amor Amor</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Amor Amor" aria-label="Agregar Amor Amor al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Anaïs-Anaïs." target="_blank"><span>Anaïs-Anaïs</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Anaïs-Anaïs" aria-label="Agregar Anaïs-Anaïs al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>KENZO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Flower." target="_blank"><span>Flower</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Flower" aria-label="Agregar Flower al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>GIORGIO ARMANI</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Aqua%20di%20Gio." target="_blank"><span>Aqua di Gio</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Aqua di Gio" aria-label="Agregar Aqua di Gio al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Acqua%20di%20Gioa." target="_blank"><span>Acqua di Gioa</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Acqua di Gioa" aria-label="Agregar Acqua di Gioa al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>DINY</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Be%20Delicious." target="_blank"><span>Be Delicious</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Be Delicious" aria-label="Agregar Be Delicious al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>VIKTOR & ROLF</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bonbon." target="_blank"><span>Bonbon</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bonbon" aria-label="Agregar Bonbon al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Flower%20Bomb." target="_blank"><span>Flower Bomb</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Flower Bomb" aria-label="Agregar Flower Bomb al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>VICTORIA’S SECRET</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Bombshell%20Night." target="_blank"><span>Bombshell Night</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Bombshell Night" aria-label="Agregar Bombshell Night al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Very%20Sexy." target="_blank"><span>Very Sexy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Very Sexy" aria-label="Agregar Very Sexy al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Summer%20Daze." target="_blank"><span>Summer Daze</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Summer Daze" aria-label="Agregar Summer Daze al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>ARIANA GRANDE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Sweet%20Like%20Candy." target="_blank"><span>Sweet Like Candy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Sweet Like Candy" aria-label="Agregar Sweet Like Candy al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>J.P GAULTIER</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Divine." target="_blank"><span>Divine</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Divine" aria-label="Agregar Divine al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Scandal." target="_blank"><span>Scandal</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Scandal" aria-label="Agregar Scandal al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Scandal%20Le%20Parfum." target="_blank"><span>Scandal Le Parfum</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Scandal Le Parfum" aria-label="Agregar Scandal Le Parfum al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>ARMANI</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Armani%20Code." target="_blank"><span>Armani Code</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Armani Code" aria-label="Agregar Armani Code al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20My%20Way." target="_blank"><span>My Way</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="My Way" aria-label="Agregar My Way al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20My%20Way%20Intense." target="_blank"><span>My Way Intense</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="My Way Intense" aria-label="Agregar My Way Intense al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Si." target="_blank"><span>Si</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Si" aria-label="Agregar Si al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>YVES SAINT LAURENT</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Black%20Opium." target="_blank"><span>Black Opium</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Black Opium" aria-label="Agregar Black Opium al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Libre." target="_blank"><span>Libre</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Libre" aria-label="Agregar Libre al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>DELINA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Delina%20Parfums%20de%20Marly." target="_blank"><span>Delina Parfums de Marly</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Delina Parfums de Marly" aria-label="Agregar Delina Parfums de Marly al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>ISSEY MIYAKE</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20L%27Eau%20D%27Issey." target="_blank"><span>L’Eau D’Issey</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="L’Eau D’Issey" aria-label="Agregar L’Eau D’Issey al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CHANEL</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Chanel%20N°%205." target="_blank"><span>Chanel N° 5</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Chanel N° 5" aria-label="Agregar Chanel N° 5 al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>MOSCHINO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Toy%20Boy." target="_blank"><span>Toy Boy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Toy Boy" aria-label="Agregar Toy Boy al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>DOLCE & GABBANA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Lightning%20Blue." target="_blank"><span>Lightning Blue</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Lightning Blue" aria-label="Agregar Lightning Blue al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20The%20One." target="_blank"><span>The One</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="The One" aria-label="Agregar The One al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20The%20Only%20One." target="_blank"><span>The Only One</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="The Only One" aria-label="Agregar The Only One al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>J. DEL POZO</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Halloween." target="_blank"><span>Halloween</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Halloween" aria-label="Agregar Halloween al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>CALVIN KLEIN</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Eternity." target="_blank"><span>Eternity</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Eternity" aria-label="Agregar Eternity al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20One%20Shock." target="_blank"><span>One Shock</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="One Shock" aria-label="Agregar One Shock al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>DAVIDOFF</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Cool%20Water." target="_blank"><span>Cool Water</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Cool Water" aria-label="Agregar Cool Water al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>BRITNEY SPEARS</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Fantasy." target="_blank"><span>Fantasy</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Fantasy" aria-label="Agregar Fantasy al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>LANCOME</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Idole." target="_blank"><span>Idole</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Idole" aria-label="Agregar Idole al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20La%20Vida%20Es%20Bella." target="_blank"><span>La Vida Es Bella</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="La Vida Es Bella" aria-label="Agregar La Vida Es Bella al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20La%20Vida%20Es%20Bella%20Intense." target="_blank"><span>La Vida Es Bella Intense</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="La Vida Es Bella Intense" aria-label="Agregar La Vida Es Bella Intense al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Tresor%20Le%20Nuit." target="_blank"><span>Tresor Le Nuit</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Tresor Le Nuit" aria-label="Agregar Tresor Le Nuit al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>NINA RICCI</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Nina." target="_blank"><span>Nina</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Nina" aria-label="Agregar Nina al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Ricci%20Ricci." target="_blank"><span>Ricci Ricci</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Ricci Ricci" aria-label="Agregar Ricci Ricci al carrito">+</button></div>
+</div></div>
+<div class="brand-group"><h3>SHAKIRA</h3><div class="perfume-list">
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Shakira%20Elixir." target="_blank"><span>Shakira Elixir</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Shakira Elixir" aria-label="Agregar Shakira Elixir al carrito">+</button></div>
+<div class="perfume-item-wrap"><a class="perfume-item" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20Shakira%20Rock." target="_blank"><span>Shakira Rock</span><small>5 ml · 10 ml · 60 ml</small></a></small></a><button class="add-mini" type="button" data-name="Shakira Rock" aria-label="Agregar Shakira Rock al carrito">+</button></div>
+</div></div>
+</div></div></section>
+
+    <!-- COMO COMPRAR -->
+    <section id="comprar">
+      <div class="container">
+        <div class="section-kicker">Simple y directo</div>
+        <h2 class="section-title">¿Cómo comprar?</h2>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">01</div>
+            <h3>Elegí</h3>
+            <p>Encontrá la fragancia que más te guste.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">02</div>
+            <h3>Elegí el tamaño</h3>
+            <p>5 ml, 10 ml o 60 ml.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">03</div>
+            <h3>Consultanos</h3>
+            <p>Preguntanos por disponibilidad y precio.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">04</div>
+            <h3>Coordinamos</h3>
+            <p>Definimos la entrega y disfrutás tu fragancia.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRESENTACION -->
+    <section>
+      <div class="container">
+        <div class="brand-box">
+          <div class="big-s">S</div>
+          <h2 class="section-title">Detalles que hacen la diferencia.</h2>
+          <p>
+            En Sagus buscamos que cada decant sea más que una muestra:
+            una presentación cuidada y una experiencia que quieras repetir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="section-kicker">Contacto</div>
+        <h2 class="section-title">¿Ya elegiste el tuyo?</h2>
+        <p>Consultanos por disponibilidad, tamaños y precios.</p>
+        <p><strong>Instagram:</strong> @Sagus_prime02</p>
+        <p><strong>WhatsApp:</strong> 11 6465-1719</p>
+
+        <div class="contact-actions">
+          <a class="btn" href="https://wa.me/5491164651719?text=Hola%20Sagus%2C%20quiero%20consultar%20por%20los%20decants." target="_blank">
+            WHATSAPP
+          </a>
+          <a class="btn dark" href="https://instagram.com/Sagus_prime02" target="_blank">
+            INSTAGRAM
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <strong>SAGUS</strong><br><br>
+    No vendemos perfumes. Vendemos presencia. ✨<br>
+    Decants importados · 5 ml · 10 ml · 60 ml · Catálogo completo
+  </footer>
+
+
+  <!-- CARRITO -->
+  <button id="cartButton" class="cart-button" type="button" aria-label="Abrir carrito">
+    <span class="cart-symbol">🛒</span>
+    <span>Carrito</span>
+    <b id="cartCount">0</b>
+  </button>
+
+  <div id="cartOverlay" class="cart-overlay" aria-hidden="true">
+    <aside class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="cart-head">
+        <div>
+          <div class="section-kicker">Tu selección</div>
+          <h2 id="cartTitle">Carrito</h2>
+        </div>
+        <button id="closeCart" class="close-cart" type="button" aria-label="Cerrar carrito">×</button>
+      </div>
+
+      <div id="cartItems" class="cart-items">
+        <div class="empty-cart">
+          <div>🧴</div>
+          <h3>Tu carrito está vacío</h3>
+          <p>Agregá perfumes desde el catálogo.</p>
+        </div>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-note">Los precios se confirman por WhatsApp según fragancia y tamaño.</div>
+        <button id="sendCart" class="btn cart-send" type="button">PEDIR POR WHATSAPP</button>
+        <button id="clearCart" class="btn dark cart-clear" type="button">VACIAR CARRITO</button>
+      </div>
+    </aside>
+  </div>
+
+
+<script>
+(() => {
+  const WA = "https://wa.me/5491164651719";
+  const input = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearSearch");
+  const result = document.getElementById("searchResult");
+  const filters = [...document.querySelectorAll(".filter")];
+  const sections = [...document.querySelectorAll("#arabes, #masculinos, #femeninos")];
+  const cartButton = document.getElementById("cartButton");
+  const cartOverlay = document.getElementById("cartOverlay");
+  const closeCart = document.getElementById("closeCart");
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const clearCart = document.getElementById("clearCart");
+  const sendCart = document.getElementById("sendCart");
+
+  let activeFilter = "all";
+  let cart = JSON.parse(localStorage.getItem("sagusCart") || "[]");
+
+  function getItems() {
+    return [...document.querySelectorAll(".perfume-item-wrap")];
+  }
+
+  function categoryFor(item) {
+    const section = item.closest("section");
+    return section ? section.id : "";
+  }
+
+  function applyFilters() {
+    const q = (input?.value || "").trim().toLowerCase();
+    let visible = 0;
+
+    getItems().forEach(wrap => {
+      const link = wrap.querySelector(".perfume-item");
+      const name = link?.querySelector("span")?.textContent.toLowerCase() || "";
+      const brand = link?.closest(".brand-group")?.querySelector("h3")?.textContent.toLowerCase() || "";
+      const cat = categoryFor(wrap);
+      const sizes = link?.querySelector("small")?.textContent.toLowerCase() || "";
+
+      const matchesText = !q || name.includes(q) || brand.includes(q);
+      const matchesFilter =
+        activeFilter === "all" ||
+        activeFilter === cat ||
+        sizes.includes(activeFilter.toLowerCase());
+
+      const show = matchesText && matchesFilter;
+      wrap.style.display = show ? "flex" : "none";
+      if (show) visible++;
+    });
+
+    sections.forEach(section => {
+      const anyVisible = [...section.querySelectorAll(".perfume-item-wrap")]
+        .some(x => x.style.display !== "none");
+      section.style.display = anyVisible ? "" : "none";
+    });
+
+    if (q || activeFilter !== "all") {
+      result.textContent = `${visible} fragancia${visible === 1 ? "" : "s"} encontrada${visible === 1 ? "" : "s"}.`;
+    } else {
+      result.textContent = "Buscá por nombre, marca o filtrá por categoría y tamaño.";
+    }
+  }
+
+  input?.addEventListener("input", applyFilters);
+  clearBtn?.addEventListener("click", () => {
+    input.value = "";
+    applyFilters();
+    input.focus();
+  });
+
+  filters.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filters.forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  function saveCart() {
+    localStorage.setItem("sagusCart", JSON.stringify(cart));
+  }
+
+  function addToCart(name) {
+    const existing = cart.find(x => x.name === name && x.size === "5 ml");
+    if (existing) existing.qty++;
+    else cart.push({name, qty:1, size:"5 ml"});
+    saveCart();
+    renderCart();
+    openCart();
+  }
+
+  function changeQty(index, delta) {
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) cart.splice(index, 1);
+    saveCart();
+    renderCart();
+  }
+
+  function renderCart() {
+    const totalQty = cart.reduce((sum, x) => sum + x.qty, 0);
+    cartCount.textContent = totalQty;
+
+    if (!cart.length) {
+      cartItems.innerHTML = `
+        <div class="empty-cart">
+          <div>🧴</div>
+          <h3>Tu carrito está vacío</h3>
+          <p>Agregá perfumes desde el catálogo.</p>
+        </div>`;
+      return;
+    }
+
+    cartItems.innerHTML = cart.map((item, i) => `
+      <div class="cart-item">
+        <div>
+          <h3>${escapeHtml(item.name)}</h3>
+          <small>Elegí el tamaño</small>
+          <select class="cart-size" data-index="${i}" aria-label="Tamaño de ${escapeHtml(item.name)}">
+            <option value="5 ml" ${item.size==="5 ml"?"selected":""}>5 ml</option>
+            <option value="10 ml" ${item.size==="10 ml"?"selected":""}>10 ml</option>
+            <option value="60 ml" ${item.size==="60 ml"?"selected":""}>60 ml</option>
+          </select>
+        </div>
+        <div class="cart-controls">
+          <button type="button" data-action="minus" data-index="${i}">−</button>
+          <strong>${item.qty}</strong>
+          <button type="button" data-action="plus" data-index="${i}">+</button>
+          <button type="button" class="cart-remove" data-action="remove" data-index="${i}">×</button>
+        </div>
+      </div>`).join("");
+
+    cartItems.querySelectorAll(".cart-size").forEach(select => {
+      select.addEventListener("change", () => {
+        cart[Number(select.dataset.index)].size = select.value;
+        saveCart();
+        renderCart();
+      });
+    });
+
+    cartItems.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const i = Number(btn.dataset.index);
+        if (btn.dataset.action === "minus") changeQty(i, -1);
+        if (btn.dataset.action === "plus") changeQty(i, 1);
+        if (btn.dataset.action === "remove") { cart.splice(i,1); saveCart(); renderCart(); }
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[c]));
+  }
+
+  function openCart() {
+    cartOverlay.classList.add("open");
+    cartOverlay.setAttribute("aria-hidden","false");
+    document.body.classList.add("cart-open");
+  }
+
+  function closeCartDrawer() {
+    cartOverlay.classList.remove("open");
+    cartOverlay.setAttribute("aria-hidden","true");
+    document.body.classList.remove("cart-open");
+  }
+
+  document.querySelectorAll(".add-mini, .add-product").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      addToCart(btn.dataset.name);
+    });
+  });
+
+  cartButton.addEventListener("click", openCart);
+  closeCart.addEventListener("click", closeCartDrawer);
+  cartOverlay.addEventListener("click", e => {
+    if (e.target === cartOverlay) closeCartDrawer();
+  });
+
+  clearCart.addEventListener("click", () => {
+    cart = [];
+    saveCart();
+    renderCart();
+  });
+
+  sendCart.addEventListener("click", () => {
+    if (!cart.length) {
+      openCart();
+      return;
+    }
+    const lines = cart.map(x => `• ${x.name} — ${x.size} — cantidad: ${x.qty}`);
+    const message =
+      "Hola Sagus, quiero hacer este pedido:%0A%0A" +
+      encodeURIComponent(lines.join("\n")) +
+      "%0A%0AQuiero consultar precios y elegir el tamaño (5 ml, 10 ml o 60 ml).";
+    window.open(`${WA}?text=${message}`, "_blank");
+  });
+
+  renderCart();
+  applyFilters();
+})();
+</script>
+
+</body>
+</html>
